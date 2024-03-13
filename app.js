@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ejs = require("ejs");
-
+const Listing = require("./models/listings")
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/wanderlust").then(()=>{
@@ -14,6 +14,19 @@ mongoose.connect("mongodb://localhost:27017/wanderlust").then(()=>{
 app.get("/",(req,res)=>{
     res.send("root is working")
 })
+
+
+app.get("/testListing",async (req,res)=>{
+    let sampleListings =new Listing({
+        title:"My new Villa",
+        description:"BY the beach",
+        price:1200,
+        location:"Calangute , Goa",
+        country:india
+    })
+    await sampleListings.save();
+    res.send("working")
+});
 
 
 app.listen(8080,()=>{
