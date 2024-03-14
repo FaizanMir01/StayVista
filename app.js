@@ -17,14 +17,15 @@ app.get("/",(req,res)=>{
 
 
 app.get("/testListing",async (req,res)=>{
-    let sampleListings =new Listing({
+    let sampleListings =  new Listing({
         title:"My new Villa",
         description:"BY the beach",
         price:1200,
         location:"Calangute , Goa",
-        country:india
+        country:"india"
     })
     await sampleListings.save();
+    console.log("saved")
     res.send("working")
 });
 
