@@ -3,12 +3,18 @@ const mongoose = require("mongoose");
 const Listing = require("./models/listings")
 const path = require("path");
 const app = express();
+const methodOverride = require("method-override")
+const ejsMate = require("ejs-mate");
 
 
+
+
+app.use(express.static(path.join(__dirname,"/public")))
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}))
-
+app.use(methodOverride("_method"))
+app.engine("ejs", ejsMate);
 
 
 
@@ -44,18 +50,31 @@ app.get("/listings/:id",async (req,res)=>{
     const listing = await Listing.findById(id);
     res.render("listings/show.ejs",{listing})
 })
+// edit route
+app.get("/listings/:id/edit",async(req,res)=>{
+    let {id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render("./listings/edit.ejs",{listing})
+})
+// update route
+app.put("/listings/:id",async(req,res)=>{
+    let {id } = req.params;
+    await Listing.findByIdAndUpdate(id,{...req.body.listing})
+
+    res.redirect("/listings")
+})
+
+//delete route
+app.delete("/listings/:id",async(req,res)=>{
+    let {id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect("/listings")
+})
 
 app.post("/listings",async(req,res)=>{
     const listing = new Listing(req.body.listing);
-
     await listing.save()
     res.redirect("/listings");
-
-
-
-
-
-
 })
 /* app.get("/testListing",async (req,res)=>{
     let sampleListings =  new Listing({
