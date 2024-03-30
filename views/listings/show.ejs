@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<% layout('./layouts/boilerplate.ejs') %>
+
 <body>
+    <%- include('../includes/navbar.ejs') %>
     <h3>listing details</h3>
     <ul>
         <li><%= listing.title%></li>
@@ -20,5 +16,5 @@
     <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
     <button>Delete this post</button>
 </form>
+<%- include('../includes/footer.ejs') %>
 </body>
-</html>

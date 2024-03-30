@@ -1,3 +1,41 @@
-body{
-    background-color: blueviolet;
+.fa-compass{
+    color: orangered;
+    font-size: 3rem;
 }
+.card{
+    border: none;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    height: 20rem;
+    border-radius: 1rem;
+}
+.nav-link {
+    color: black;
+    font-size: 1.2rem;
+}
+.navbar{
+    padding:  2rem 0rem;
+}
+.listing-link{
+    text-decoration: none;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: .2;
+    background-color: white;
+}
+.card-header .fa-brands{
+    font-size: 2rem;
+    margin: 0rem 1rem;
+    color: orangered;
+}
+.card-header .fa-brands:hover{
+    color: rgba(255, 68, 0, 0.473);
+}
+.card-header a{
+    text-decoration: none;
+}
+

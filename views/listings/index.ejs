@@ -1,13 +1,28 @@
 <% layout("./layouts/boilerplate.ejs") %>
 <body>
-    <H3>all listings</H3>
+    <%- include('../includes/navbar.ejs') %>
+    <H3>All listings</H3>
     <form action="/listings/new" method="get">
-    <button>create new listings</button>
     </form>
 
-    <ul>
+ 
+     
+      
+ <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 d-flex justify-content-evenly ">
         <% for(listings of allListings) {%>
-            <li><a href="/listings/<%= listings._id %>"><%= listings.title %></a></li>
+
+    <a href="/listings/<%= listings._id %>" class="listing-link">
+      <div class="card col ">
+        <img src="<%= listings.image.url %>" class="card-img-top" alt="listing image">
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+          <h5 class="card-title"><%= listings.title %></h5>
+          <p class="card-text"> &#8377; <%= listings.price.toLocaleString("en-IN") %></p>
+        </div>
+    </div>
+</a>
         <%}  %>
-    </ul>
+      
+    </div>
+    <%- include('../includes/footer.ejs') %>
 </body>
