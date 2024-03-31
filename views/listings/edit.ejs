@@ -1,14 +1,35 @@
 <% layout("./layouts/boilerplate.ejs") %>
 <body>
-    <form action="/listings/<%= listing._id %>?_method=PUT " method="post" >
-        <input type="text" name="listing[title]" value="<%= listing.title %>">
-        <textarea type="text" name="listing[description]"><%= listing.description %></textarea>
-        <input type="number" name="listing[price]" value="<%= listing.price %>"> >
-        <input type="text" name="listing[country]" value="<%= listing.country%>">>
-        <input type="text" name="listing[image]" value="<%= listing.image %>">>
-        <input type="text" name="listing[location]" value="<%= listing.location %>">>
-        <button>update</button>
-
+    <%- include('../includes/navbar.ejs') %>
+    <h2>Edit this Listing</h2>
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="post" class="new-form">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" class="form-control"><%= listing.description %></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" name="listing[price]" value="<%= listing.price %>" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="listing[country]" value="<%= listing.country %>" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image Url</label>
+            <input type="text" name="listing[image]" value="<%= listing.image %>" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
+    
+    <%- include('../includes/footer.ejs') %>
     
 </body>

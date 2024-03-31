@@ -1,8 +1,9 @@
 <% layout('./layouts/boilerplate.ejs') %>
-
 <body>
     <%- include('../includes/navbar.ejs') %>
-    <h3>listing details</h3>
+    <div class="listing-details">
+    <h3>Listing details</h3>
+    <img src="<%= listing.image.url %>" alt="">
     <ul>
         <li><%= listing.title%></li>
         <li><%= listing.description %></li>
@@ -16,5 +17,6 @@
     <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
     <button>Delete this post</button>
 </form>
+</div>
 <%- include('../includes/footer.ejs') %>
 </body>

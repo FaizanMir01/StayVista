@@ -1,16 +1,43 @@
 <% layout("./layouts/boilerplate.ejs") %>
+
 <body>
     <%- include('../includes/navbar.ejs') %>
-    <form action="/listings " method="post">
-        <input type="text" name="listing[title]" placeholder="enter tilte">
-        <textarea type="text" name="listing[description]" placeholder="enter description"></textarea>
-        <input type="number" name="listing[price]"  placeholder="enter price" >
-        <input type="text" name="listing[country]" placeholder="enter country">
-        <input type="text" name="listing[image]" placeholder="enter image url">
-        <input type="text" name="listing[location]" placeholder="enter location">
-        <button>Add</button>
+    <div class="row">
+    <div class="col-8 offset-2">
+        <h2>Create New Listing</h2>
+    <form action="/listings " method="post" class="new-form">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="listing[title]" placeholder="enter tilte" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea type="text" name="listing[description]" placeholder="enter description" class="form-control"></textarea>
+        </div >
+        <div class="mb-3">
+            <label for="price" class="form-label">price</label>
+            <input type="number" name="listing[price]"  placeholder="enter price" class="form-control" >
 
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="listing[country]" placeholder="enter country" class="form-control">
+
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image Url</label>
+            <input type="text" name="listing[image]" placeholder="enter image url" class="form-control">
+
+        </div>
         
+        <div class="mb-3">
+            <label for="location" class="form-label">location</label>
+            <input type="text" name="listing[location]" placeholder="enter location" class="form-control">
+        </div>
+       
+        <button class="btn btn-dark px-3 mb-3">Add</button>
     </form>
+</div>
+</div>
     <%- include('../includes/footer.ejs') %>
 </body>

@@ -1,3 +1,12 @@
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container{
+    flex: 1;
+}
 .fa-compass{
     color: orangered;
     font-size: 3rem;
@@ -38,4 +47,47 @@
 .card-header a{
     text-decoration: none;
 }
+.form-label{
+    font-size: 1.4rem;
+}
+.listing-details {
+    font-family: ;
+    margin: 0;
+    padding: 0;
+  }
+.listing-details h3 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
 
+.listing-details ul {
+    list-style: none;
+    padding: 0;
+  }
+
+.listing-details li {
+    margin-bottom: 5px;
+  }
+
+.listing-details a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+.listing-details button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+.listing-details button:hover {
+  background-color: #c82333;
+  }
+.listing-details img{
+      height: 20rem;
+      object-fit: cover;
+      width: 50%;
+      border-radius: 1rem;
+  }
