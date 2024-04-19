@@ -5,34 +5,40 @@
     <div class="row">
     <div class="col-8 offset-2">
         <h2>Create New Listing</h2>
-    <form action="/listings " method="post" class="new-form">
+    <form action="/listings " method="post" class="new-form needs-validation" novalidate>
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="listing[title]" placeholder="enter tilte" class="form-control">
+            <input type="text" name="listing[title]" required placeholder="enter tilte" class="form-control">
+            <div class="valid-feedback">Title looks good!</div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea type="text" name="listing[description]" placeholder="enter description" class="form-control"></textarea>
+            <textarea type="text" name="listing[description]" required placeholder="enter description" class="form-control"></textarea>
+            <div class="invalid-feedback">Please enter a short description</div>
         </div >
         <div class="mb-3">
             <label for="price" class="form-label">price</label>
-            <input type="number" name="listing[price]"  placeholder="enter price" class="form-control" >
+            <input type="number" name="listing[price]"  required placeholder="enter price" class="form-control" >
+            <div class="invalid-feedback">Price should be valid</div>
 
         </div>
         <div class="mb-3">
             <label for="country" class="form-label">Country</label>
-            <input type="text" name="listing[country]" placeholder="enter country" class="form-control">
+            <input type="text" name="listing[country]" required placeholder="enter country" class="form-control">
+            <div class="invalid-feedback">Country name should be valid</div>
 
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image Url</label>
             <input type="text" name="listing[image][url]" placeholder="enter image url" class="form-control">
+            
 
         </div>
         
         <div class="mb-3">
             <label for="location" class="form-label">location</label>
-            <input type="text" name="listing[location]" placeholder="enter location" class="form-control">
+            <input type="text" name="listing[location]" required placeholder="enter location" class="form-control">
+            <div class="invalid-feedback">Location should be</div>
         </div>
        
         <button class="btn btn-dark px-3 mb-3">Add</button>
