@@ -18,5 +18,26 @@
     <button>Delete this post</button>
 </form>
 </div>
+<hr>
+<div >
+    <h4>Leave a Review</h4>
+    <form action="/listings/<%= listing.id %>/review 
+    " method="post" class="mb-3">
+    <div class="mb-3 mt-3">
+        <label for="rating" class="form-label">rating</label>
+        <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="comment" class="form-label">Comments</label>
+        <textarea name="review[comment]" id="comment"
+        cols="30"
+        rows="5"
+        class="form-control"
+        ></textarea>
+    </div>
+    <button class="btn btn-outline-dark">Submit</button>
+</form>
+
+</div>
 <%- include('../includes/footer.ejs') %>
 </body>
