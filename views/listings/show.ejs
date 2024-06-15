@@ -22,22 +22,41 @@
 <div >
     <h4>Leave a Review</h4>
     <form action="/listings/<%= listing.id %>/review 
-    " method="post" class="mb-3">
+    " method="post" class="mb-3 needs-validation" novalidate>
     <div class="mb-3 mt-3">
         <label for="rating" class="form-label">rating</label>
         <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
     </div>
     <div class="mb-3 mt-3">
         <label for="comment" class="form-label">Comments</label>
-        <textarea name="review[comment]" id="comment"
+        <textarea name="review[comment]" id="comment" required
         cols="30"
         rows="5"
         class="form-control"
         ></textarea>
+        <div class="invalid-feedback">
+            please add some comments for review
+        </div>
     </div>
     <button class="btn btn-outline-dark">Submit</button>
 </form>
+<hr>
 
+<h4>All reviews</h4>
+<div class="row ">
+<% for(review of listing.reviews) {%>
+    <div class="card col-5 mb-3 ms-3 review-card">
+        <div class="card-body">
+            <h5 class="card-title">Jane Feo</h5>
+            <p class="card-text"><%= review.comment %></p>
+            <p class="card-text"><%= review.rating %> stars</p>
+        </div>
+        <form class="mb-3" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+            <button class="btn btn-sm btn-dark">Delete</button>
+        </form>
+    </div>
+    <% } %>
+</div>
 </div>
 <%- include('../includes/footer.ejs') %>
 </body>
