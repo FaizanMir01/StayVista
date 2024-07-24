@@ -1,16 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Listing = require("./models/listings.js")
-const Review = require("./models/review.js")
 const path = require("path");
 const app = express();
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./utils/expressError.js")
-const { listingSchema, reviewSchema } = require("./schema.js")
-
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/review.js");
+const session = require("express-session");
+const flash= require("connect-flash")
 
 
 app.use(express.urlencoded({ extended: true })); // Ensure this is placed before any route
@@ -21,6 +19,19 @@ app.set("views", path.join(__dirname, "views"));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
+const sessionOptions=
+    {
+        secret:"supersecret",
+        resave:false,
+        saveUninitialized:true,
+        cookie:{
+            expires:Date.now()+7*24*60*60*1000,
+            maxAge:7*24*60*60*1000,
+            httpOnly:true
+        }
+    }
+
+
 // connection
 mongoose.connect("mongodb://localhost:27017/wanderlust").then(() => {
     console.log("database connection successful");
@@ -29,50 +40,25 @@ mongoose.connect("mongodb://localhost:27017/wanderlust").then(() => {
 })
 
 
-// Validate review function
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-}
+
 
 // root 
 app.get("/", (req, res) => {
     res.send("root is working")
 })
 
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success= req.flash("success");
+    res.locals.error= req.flash("error");
+    next();
+})
+
 app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
 
-//revies Post route
-app.post("/listings/:id/review",validateReview,wrapAsync( async(req,res)=>{
-
-   let listing = await Listing.findById(req.params.id)
-   let newReview = new Review(req.body.review)
-    listing.reviews.push(newReview)
-
-    await newReview.save()
-   await listing.save()
-
-   res.redirect(`/listings/${listing._id}`)
-   
-console.log("Saved")
-
-}))
-
-
-//delete review route
-
-app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async(req,res)=>{
-    let {id, reviewId}= req.params;
-
-   await  Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}})
-    await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}`)
-}))
 
 
 app.all("*", (req, res, next) => {
